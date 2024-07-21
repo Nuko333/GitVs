@@ -1,2 +1,2 @@
 # Test
-VScode用のレポジトリ！！
+The remote repository for VScode!!
