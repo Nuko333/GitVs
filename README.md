@@ -1,5 +1,5 @@
-#The remote repository for VScode!!
+# The remote repository for VScode!!
 
-#Jyuku Start Plan!! by Canva
+# Jyuku Start Plan!! by Canva
 
-#Univ Inn!!
+# Univ Inn!!
