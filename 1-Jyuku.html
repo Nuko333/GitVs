@@ -4,12 +4,25 @@
   <head>
     <title>Jyuku</title>
     <meta charset="UTF-8">
+    <link href="sample_style.css" rel="stylesheet">
+
+    <!--http://www.ic.daito.ac.jp/~mizutani/html/mathexpress.htmlを参考にlatex数式を-->
+    <script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
     <script type="text/x-mathjax-config">
-       MathJax.Hub.Config({TeX:{equationNumbers:{autoNumber:"AMS"}}});
+     MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" }},
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { matchFontHeight: false },
+    displayAlign: "left",
+    displayIndent: "2em"
+    });
     </script>
-    <script type="text/javascript" async 
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML,/www_func/MathJax/MyConfig.js">
-    </script>
+    
   </head>
      
   <body>
@@ -18,5 +31,38 @@
     <p>教科書ガイドを参考に作る、学校進路情報の整理(県立HPや私立説明会)</p>
     <p>２次関数や円錐の表面積の解説　⇒htmlとpdfの両方で作る、できれば動画化で！！</p>
     <p>pythonでweb保存、powershellでアドレス取り出し(PCのPSfileやDBの中にあり)</p>
+    <hr>
+    <br>
+    <h2><img src="img/rainbow.png" width="25" height="25"> 塾の動機と意義</h2>
+    <p>塾をスタートする理由、他の塾との比較、他では重んじないところ</p>
+    <p>学校が頼れない、人間的にも、、</p>
+    <p>個別で相談できる場所を！一緒に頑張れる場所を継続的に！、サポートしたい＆会話が楽しい！</p>
+    <p>受験との差を埋めること、コンパクトに</p>
+    <p>次で述べる自分の状況、経験を生かしていくこと</p>
+    <p>科目を絞ること、数理の需要が高いこと</p>
+    <p>高専、大学生をメインに微積授業！</p>
+    <h2><img src="img/rainbow.png" width="25" height="25"> 自分の目的、進行状況</h2>
+    <p>自分も学んでいることをHPで報告、終わりはないこと</p>
+    <p>理想像</p>
+    <p>英語学習は学校教育と本質の差が大きすぎ</p>
+    <p>英語と高校理系はいったん保留中、どんなことが提供できるか？、いずれスタートしていく</p>
+    <h2><img src="img/rainbow.png" width="25" height="25"> 塾の仕組み、方針</h2>
+    <p>まず中学をメインに！！授業＋演習、理数中心に、復習＆予習、</p>
+    <p>ポイントを絞る効率アップ、コンパクトに受験に向けて学習！！自分の強みを伸ばす時間も作る大切さ</p>
+    <p>目標とそれに向けての時間！！時間をどう使うか？４０００時間？</p>
+    <p>勉強と本質、誰にでもできるが、時間のかかり方が違う、あとは本人の資質との兼ね合いか？</p>
+    <p>テストとは？問われること、そしてどう評価されるか？学校の意義、受験や模試との差を埋める</p>
+    <p>定期テスト・受験や模試に向けての作戦、下野との格差、復習と予習を交互、もしくは受験対策日を作る？</p>
+    <p>テストの評価（平均、難易度、昔と違い）テスト分析と反省会、ワークや学校教材の把握、テスト勉強の必要性</p>
+    <h2><img src="img/rainbow.png" width="25" height="25"> 受験のその先へ、真の学び目的</h2>
+    <p>受験がそもそもある理由について考える</p>
+    <p>教われないことが多い、自分でトライ＆エラー</p>
+    <p>難関をくぐりぬけるメリットは、、、内容ではなく最高の環境と仲間になるか、、、</p>
+    <p>時間無限なら誰でもいけるが、限りあり、</p>
+    <p>真の研究、受験を100％合格するためには、経済的維持が必要、それがあれば諦め不要か！？</p>
+
+    <p class="under">aaa</p>
+    
+
   </body>
 </html>
