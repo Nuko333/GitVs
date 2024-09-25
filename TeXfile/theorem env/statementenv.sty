@@ -1,0 +1,346 @@
+﻿%Enviroment of Axiom, Def (definition), Th (theorem), Prop (proposition), Lem (lemma), Cor(corollary), Rem (remark), Ex (example), Question, Pred (prediction).
+\usepackage{xcolor}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usepackage{ifthen} %Using \ifthenelse
+\usepackage{etoolbox} %if else package of blank
+\usepackage{amsthm} %Proof environment
+\usepackage[most]{tcolorbox} %Insert tcolorbox package and its option
+
+%Define counter
+\newcounter{statementnum}[section]
+\newcounter{axiomnum}[statementnum]
+\newcounter{defnum}[statementnum]
+\newcounter{thnum}[statementnum]
+\newcounter{propnum}[statementnum]
+\newcounter{lemnum}[statementnum]
+\newcounter{cornum}[statementnum]
+\newcounter{remnum}[statementnum]
+\newcounter{exnum}[statementnum]
+\newcounter{questnum}[statementnum]
+\newcounter{prednum}[statementnum]
+\renewcommand{\thestatementnum}{\arabic{section}.\arabic{statementnum}}
+%Statement color
+%https://latexcolor.com/
+\definecolor{axiomcol}{rgb}{1,0.5,0} %オレンジ
+\definecolor{defcol}{rgb}{0,1,0} %緑
+\definecolor{thcol}{rgb}{1,0,0} %赤
+\definecolor{propcol}{rgb}{0,1,1} %水色
+\definecolor{lemcol}{rgb}{0,0,1} %青
+\definecolor{corcol}{rgb}{0.5,1,0} %黄緑
+\definecolor{remcol}{rgb}{1,1,0} %黄色
+\definecolor{excol}{rgb}{.8,.8,.8} %灰色
+\definecolor{questcol}{rgb}{1,0,1} %ピンク
+\definecolor{predcol}{rgb}{0.6,0,1} %紫色
+
+%Foundamental design of tcolorbox
+\tcbset{
+    statement/.style={
+            enhanced,
+            coltitle=black,
+            colframe=#1,
+	    fonttitle=\bfseries,
+            boxrule=1pt,
+            colback=#1!10,
+            breakable,
+            sharp corners,
+            attach boxed title to top left={yshift*=-\tcboxedtitleheight/2},
+            boxed title style={
+                    colframe=#1!5,
+                    boxrule=1pt,
+                    colback=#1,
+		    height=6mm,
+		    %bean arc
+                },
+            after upper=\hfill $\square$
+        }
+}
+%Statement environment
+\newenvironment{statesp}[3][]{%
+\ifthenelse{\equal{#2}{axiom}}{
+%Axiom environment
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{axiomnum}\label{axiom:#1} %Refference
+    \addtocounter{axiomnum}{-1}
+    \stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{Axiom~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{Axiom~\thestatementnum}~:~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=axiomcol, blank]
+}{
+%Definition environment
+\ifthenelse{\equal{#2}{def}}{
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{defnum}\label{def:#1} %Refference
+    \addtocounter{defnum}{-1}
+    \stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{Def~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{Def~\thestatementnum}~:~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=defcol, blank]
+}{
+%Theorem environment
+\ifthenelse{\equal{#2}{th}}{
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{thnum}\label{th:#1} %Refference
+    \addtocounter{thnum}{-1}
+    \stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{Th~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{Th~\thestatementnum}~:~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=thcol, blank]
+}{
+%Proposition environment
+\ifthenelse{\equal{#2}{prop}}{
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{propnum}\label{prop:#1} %Refference
+    \addtocounter{propnum}{-1}
+    \stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{Prop~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{Prop~\thestatementnum}~:~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=propcol, blank]
+}{
+%Lemma environment
+\ifthenelse{\equal{#2}{lem}}{
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{lemnum}\label{lem:#1} %Refference
+    \addtocounter{lemnum}{-1}
+    \stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{Lem~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{Lem~\thestatementnum}~:~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=lemcol, blank]
+}{
+%Remark environment
+\ifthenelse{\equal{#2}{cor}}{
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{cornum}\label{cor:#1} %Refference
+    \addtocounter{cornum}{-1}
+    \stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{Cor~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{Cor~\thestatementnum}~:~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=corcol, blank]
+}{
+%Remark environment
+\ifthenelse{\equal{#2}{rem}}{
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{remnum}\label{rem:#1} %Refference
+    \addtocounter{remnum}{-1}
+    \stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{Rem~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{Rem~\thestatementnum}~:~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=remcol, blank]
+}{
+%Example environment
+\ifthenelse{\equal{#2}{ex}}{
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{exnum}\label{ex:#1} %Refference
+    \addtocounter{exnum}{-1}
+    \stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{Ex~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{Ex~\thestatementnum}~:~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=excol, blank]
+}{
+%Question environment
+\ifthenelse{\equal{#2}{quest}}{
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{questnum}\label{quest:#1} %Refference
+    \addtocounter{questnum}{-1}
+    \stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{Question~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{Question~\thestatementnum}~:~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=questcol, blank]
+}{
+%Prediction environment
+\ifthenelse{\equal{#2}{pred}}{
+    \ifblank{#1}{
+        \stepcounter{statementnum}
+    }{
+        \refstepcounter{prednum}\label{pred:#1} %Refference
+        \addtocounter{prednum}{-1}
+        \stepcounter{statementnum}
+    }
+    \ifthenelse{\equal{#3}{}}{
+        \tcbset{
+            blank/.style={title={\underline{Pred~\thestatementnum}}}
+        }
+    }{
+        \tcbset{
+            blank/.style={title={\underline{Pred~\thestatementnum}~:~(#3)}}
+        }
+    }
+    \begin{tcolorbox}[statement=predcol, blank]
+}{
+    %If an environment name is not determined environment
+    \ifblank{#1}{
+        \relax
+    }{
+        \label{#1} %Refference
+    }
+    \ifthenelse{\equal{#3}{}}{
+        \tcbset{
+            blank/.style={title={\underline{#2}}}
+        }
+    }{
+        \tcbset{
+            blank/.style={title={\underline{#2}~:~(#3)}}
+        }
+    }
+    \begin{tcolorbox}[statement=excol, blank]
+        }%Pred if
+        }%Question if
+        }%Ex if
+        }%Rem if
+        }%Cor if
+        }%Lem if
+        }%Prop if
+        }%Th if
+        }%Def if
+        }%Axiom if
+
+        }{\end{tcolorbox}}
+%Proof environment
+\renewcommand{\proofname}{\textit{pf}.)} %Change first style of proof
+\renewcommand{\qedsymbol}{$\blacksquare$} %Change end style of proof
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+    \pushQED{\qed}%
+    \normalfont \topsep6\p@\@plus6\p@\relax
+    \trivlist
+    \item\relax
+    {
+        #1\@addpunct{}}\hspace\labelsep\ignorespaces
+}{%
+    \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\newenvironment{pfsp}{\begin{proof}}{\end{proof}}
+
+
+%Refference
+\mathtoolsset{showonlyrefs=true} %Give numbers of equation in equation and align environment only to refered them.
+\usepackage[
+    dvipdfmx,
+    setpagesize=false,
+    bookmarks=true,
+    bookmarksdepth=tocdepth,
+    bookmarksnumbered=true,
+    colorlinks=true,
+    linkcolor=blue,
+    pdftitle={},
+    pdfsubject={},
+    pdfauthor={},
+    pdfkeywords={}
+]{hyperref} %Insert hyperlink into a document
+\usepackage{pxjahyper} %PDFのしおり機能の日本語文字化けを防ぐ((u)pLaTeXのときのみかく)
+\usepackage[
+    noabbrev,
+    capitalise,
+    nameinlink,
+]{cleveref} %Including label name into ref and coloring link name too
+\crefname{axiomnum}{Axiom}{Axiom}
+\Crefname{axiomnum}{Axiom}{Axiom}
+\crefname{defnum}{Def}{Def}
+\Crefname{defnum}{Def}{Def}
+\crefname{thnum}{Th}{Th}
+\Crefname{thnum}{Th}{Th}
+\crefname{propnum}{Prop}{Prop}
+\Crefname{propnum}{Prop}{Prop}
+\crefname{lemnum}{Lem}{Lem}
+\Crefname{lemnum}{Lem}{Lem}
+\crefname{remnum}{Rem}{Rem}
+\Crefname{remnum}{Rem}{Rem}
+\crefname{exnum}{Ex}{Ex}
+\Crefname{exnum}{Ex}{Ex}
+\crefname{questnum}{Question}{Question}
+\Crefname{questnum}{Question}{Question}
+\crefname{prednum}{Pred}{Pred}
+\Crefname{prednum}{Pred}{Pred}
+\newcommand{\refsp}[1]{\cref{#1}}

@@ -1,0 +1,127 @@
+\documentclass[11pt]{jsarticle}
+
+%Page margin
+\usepackage[margin=20truemm]{geometry}
+
+%Letters
+\usepackage{amsmath,mathtools,amssymb}
+\newcommand{\mf}[1]{\mathfrak{#1}} %Shorten mathfrak command
+\newcommand{\mb}[1]{\mathbb{#1}} %Shorten mathbb command
+
+%Appearance
+    %Page number
+    \pagenumbering{arabic}
+    \usepackage{lastpage}
+    \usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \fancyhf{} % clear existing header/footer entries
+    \fancyfoot[C]{\thepage \hspace{1pt} \slash \hspace{1pt} \pageref*{LastPage}}%Place Page X / Y
+    \renewcommand{\headrulewidth}{0pt} %Deleted header line
+    \renewcommand{\footrulewidth}{0pt} %Deleted footer line
+
+\usepackage{statementenv}
+
+\title{スペシャルステートメントの例}
+\author{Riley:@Na2COOH\_2}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy} %これをつけないと\maketitleのせいで右上に1が余分に追加で表示されてしまう．
+
+\section{選択公理}
+\begin{statesp}[choice]{axiom}{選択公理}
+    $\Lambda$を添え字集合として$(A_{\lambda})_{\lambda \in \Lambda}$を集合の族とする．このとき次が成り立つという主張のことを\underline{選択公理}という．
+    \begin{equation}
+        \forall \lambda \in \Lambda, A_{\lambda} \neq \emptyset \Rightarrow \prod_{\lambda \in \Lambda}A_{\lambda} \neq \emptyset
+    \end{equation}
+\end{statesp}
+
+この選択公理は数学において非常に重要な位置を占めている．多くの数学ではこの公理を仮定している．\refsp{axiom:choice}を仮定すれば次を得る．
+
+\begin{statesp}[zorn]{lem}{zorn}
+    空でない帰納的半順序集合には極大元が存在する．
+\end{statesp}
+
+\refsp{axiom:choice}と\refsp{lem:zorn}を紹介したが有用でしばしば使うのは\refsp{lem:zorn}の方である．これを用いて例えば$0$環でない単位的可換環$R$には極大イデアルが必ず存在するという定理を示すことができる．これは次章で証明する．
+
+\begin{statesp}{rem}{}
+    \refsp{axiom:choice}であるが，使用のたびに断りを入れている人をたまに見る．必要なときもあろうが選択公理を仮定しているかいないかは基本的に無視してもよいだろう．どうせどこかで使っているのだから．\\
+    また，\refsp{lem:zorn}において，極大元はその帰納的半順序集合の元である．ただし証明中の上界はこの限りでなくてもよい．当たり前だが空でないことの確認は忘れずに．
+\end{statesp}
+
+\newpage
+
+\section{極大イデアル}
+まずはもろもろ定義する．
+\begin{statesp}{def}{単位的可換環}
+    \underline{環}といったら単位的可換環を指すものとする．
+\end{statesp}
+
+\begin{statesp}{def}{イデアル}
+    $R$を環とする．\\
+    (1)$I \subset R$が\underline{イデアル}であるとは次を満たすときに言う．
+    \begin{align}
+        (a) & I \neq \emptyset                           \\
+        (b) & \forall x,y \in I, x+y \in I               \\
+        (c) & \forall r \in R, \forall x \in I, rx \in I
+    \end{align}
+    (2)$\mf{p} \subsetneq R$が$R$の\underline{素イデアル}であるとは次を満たすときに言う．
+    \begin{align}
+        \forall x,y \in \mf{p}, x \in \mf{p} ~ \mathrm{or} ~ y \in \mf{p}
+    \end{align}
+    (3)$\mf{m} \subsetneq R$が$R$の\underline{極大イデアル}であるとは次を満たすときに言う．
+    \begin{align}
+        \forall I \subset R :\mathrm{ideal}, \mf{m} \subset I \subset R \Rightarrow I = \mf{m} ~ \mathrm{or} ~ R
+    \end{align}
+\end{statesp}
+
+\begin{statesp}{def}{積閉集合}
+    $R$:環\\
+    $S \subset R$が\underline{積閉集合}であるとは次を満たすときを言う．
+    \begin{align}
+        (a) & 1 \in S                        \\
+        (b) & x,y \in S \Rightarrow xy \in S
+    \end{align}
+\end{statesp}
+
+さてここまで準備をすればうれしいことを証明できる．まずは次の命題を示そう．
+\begin{statesp}[2.4]{prop}{}
+    $R$:環，$S$:積閉集合，$I$:$I \cap S = \emptyset$なるイデアルとする．このとき次の集合族$\mathcal{M}$には極大元$\mf{p}$が存在する．さらにこれは素イデアルである．
+    \begin{align}
+        \mathcal{M} := \{ J \subset R \vert J:\mathrm{ideal}, I \subset J, J \cap S = \emptyset \}
+    \end{align}
+\end{statesp}
+\begin{pfsp}
+    $\mathcal{M}$が帰納的半順序集合であることを示し，\refsp{lem:zorn}を用いる．$I \in \mathcal{M}$であるから$\mathcal{M} \neq \emptyset$である．$(J_{\lambda})_{\lambda \in \Lambda}$を任意の$\mathcal{M}$の全順序部分集合とする．このとき$\displaystyle{\cup_{\lambda \in \Lambda}J_{\lambda}}$が上界であることが簡単にわかる．よって$\mathcal{M}$は帰納的半順序集合であり，極大元$\mf{p}$が存在する．\\
+    次に$\mf{p}$が素イデアルであることを示す．これを背理法で示す．もし素イデアルでないとすると，$xy \in \mf{p}$であるが$x,y \notin \mf{p}$であるような$x,y \in R$をとってこれる．
+    \begin{align}
+        \mf{p} \subsetneq (x) + \mf{p} \\
+        \mf{p} \subsetneq (y) + \mf{p}
+    \end{align}
+    であるから$\mf{p}$の極大性により
+    \begin{align}
+        S \cap (x) + \mf{p} \neq \emptyset \\
+        S \cap (y) + \mf{p} \neq \emptyset
+    \end{align}
+    であるから，それぞれから$r_1x + p_1 \in S \cap (x) + \mf{p}, r_2y + p_2 \in S \cap (y) + \mf{p}$と元を取る．しかしこのとき
+    \begin{align}
+        S \ni (r_1x + p_1)(r_2y + p_2) = r_1r_2xy + r_1xp_2 + r_2yp_1 + p_1p_2 \in \mf{p}
+    \end{align}
+    となり$\mf{p} \cap S = \emptyset$に反する．よって背理法により$\mf{p}$は素イデアルである．
+\end{pfsp}
+この命題により極大イデアルの存在が分かる．それをお見せしよう．
+\begin{statesp}{th}{極大イデアルの存在}
+    $R$:零環ではない環とする．\\
+    任意の全体ではないイデアル$I \subsetneq R$に対して$I \subseteq \mf{m}$なる極大イデアル$\mf{m}$が存在する．特に$R$には極大イデアルが存在する．
+\end{statesp}
+\begin{pfsp}
+    \refsp{prop:2.4}で$I = 0,S = \{1\}$とすればよい．
+\end{pfsp}
+
+\begin{statesp}[nagata]{quest}{}
+    ネーター整域$R$とそのイデアル$I$であって，$I$は単項ではなく，どんな$I \subset \mf{m}$なる極大イデアルであってもそれによる局所化$R_{\mf{m}}$の唯一の極大イデアル$\mf{m}R_{\mf{m}}$は単項イデアルとなるようなものの例を挙げよ．
+\end{statesp}
+\begin{statesp}{pred}{代数体の整数環で見つけられるのではなかろうか？}
+    \refsp{quest:nagata}の問題の$R$は代数体の整数環で見つかるのでは？と考えている．これはDedekind domainであるはずなのでその素イデアルによる局所化はすべて離散付値環となる．よって局所化の極大イデアルは単項イデアルである．この整数環がPIDではないものがあればうれしい．
+\end{statesp}
+\end{document}
