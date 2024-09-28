@@ -1,0 +1,134 @@
+﻿%Enviroment of Axiom, Def (definition), Th (theorem), Prop (proposition), Lem (lemma), Cor(corollary), Rem (remark), Ex (example), Question, Pred (prediction).
+\usepackage{xcolor}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usepackage{ifthen} %Using \ifthenelse
+\usepackage{etoolbox} %if else package of blank
+\usepackage{amsthm} %Proof environment
+\usepackage[most]{tcolorbox} %Insert tcolorbox package and its option
+
+%Define counter
+\newcounter{statementnum}[section]
+
+\renewcommand{\thestatementnum}{\arabic{section}.\arabic{statementnum}}
+
+%Statement color
+%https://latexcolor.com/
+
+\definecolor{formcol}{rgb}{1,1,0} %黄色⇒公式
+\definecolor{remarkcol}{rgb}{1,0,0} %赤⇒重要語句の文字色にする
+\definecolor{ptcol}{rgb}{0,1,1} %水色⇒ポイント
+\definecolor{corcol}{rgb}{0.5,1,0} %黄緑
+\definecolor{excol}{rgb}{.8,.8,.8} %灰色
+\definecolor{questcol}{rgb}{1,0,1} %ピンク
+
+%Foundamental design of tcolorbox
+\tcbset{
+    statement/.style={
+            enhanced,
+            coltitle=black,
+            colframe=#1,
+	    fonttitle=\bfseries,
+            boxrule=1pt,
+            colback=#1!10,
+            breakable,
+            sharp corners,
+            attach boxed title to top left={yshift*=-\tcboxedtitleheight/2},
+            boxed title style={
+                    colframe=#1,
+                    boxrule=1pt,
+                    colback=#1,
+		    height=6mm,
+		    %bean arc
+                },
+            after upper=\hfill $\square$
+        }
+}
+
+%Statement environment
+\newenvironment{statesp}[3][]{%
+
+\ifthenelse{\equal{#2}{formula}}{
+%公式environment
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{statementnum}\label{formula:#1} %Refference
+    %\stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{公式~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{公式~\thestatementnum}~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=formcol, blank]
+}{
+
+%ポイントenvironment
+\ifthenelse{\equal{#2}{point}}{
+\ifblank{#1}{
+    \stepcounter{statementnum}
+}{
+    \refstepcounter{statementnum}\label{point:#1} %Refference
+    %\stepcounter{statementnum}
+}
+\ifthenelse{\equal{#3}{}}{
+    \tcbset{
+        blank/.style={title={\underline{ポイント~\thestatementnum}}}
+    }
+}{
+    \tcbset{
+        blank/.style={title={\underline{ポイント~\thestatementnum}~:~(#3)}}
+    }
+}
+\begin{tcolorbox}[statement=ptcol, blank]
+}{
+    %If an environment name is not determined environment
+    \ifblank{#1}{
+        \relax
+    }{
+        \label{#1} %Refference
+    }
+    \ifthenelse{\equal{#3}{}}{
+        \tcbset{
+            blank/.style={title={\underline{#2}}}
+        }
+    }{
+        \tcbset{
+            blank/.style={title={\underline{#2}~:~(#3)}}
+        }
+    }
+    \begin{tcolorbox}[statement=excol, blank]
+
+        }%pt if
+        }%form if
+
+        }{\end{tcolorbox}}
+
+
+
+%Refference
+\mathtoolsset{showonlyrefs=true} %Give numbers of equation in equation and align environment only to refered them.
+\usepackage[
+    dvipdfmx,
+    setpagesize=false,
+    bookmarks=true,
+    bookmarksdepth=tocdepth,
+    bookmarksnumbered=true,
+    colorlinks=true,
+    linkcolor=blue,
+    pdftitle={},
+    pdfsubject={},
+    pdfauthor={},
+    pdfkeywords={}
+]{hyperref} %Insert hyperlink into a document
+\usepackage{pxjahyper} %PDFのしおり機能の日本語文字化けを防ぐ((u)pLaTeXのときのみかく)
+
+\usepackage{prettyref}
+\newrefformat{formula}{公式~\ref{#1}}
+\newrefformat{point}{ポイント~\ref{#1}}
+\newcommand{\refsp}[1]{\hyperref[#1]{\prettyref{#1}}}

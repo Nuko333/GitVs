@@ -1,0 +1,166 @@
+\documentclass[11pt]{jsarticle}
+%段落の自動字下げをなくす。
+\parindent = 0pt
+
+%Page margin
+\usepackage[margin=20truemm]{geometry}
+
+%Letters
+\usepackage{amsmath,mathtools,amssymb}
+\newcommand{\mf}[1]{\mathfrak{#1}} %Shorten mathfrak command
+\newcommand{\mb}[1]{\mathbb{#1}} %Shorten mathbb command
+
+%Appearance
+    %Page number
+    \pagenumbering{arabic}
+    \usepackage{lastpage}
+    \usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \fancyhf{} % clear existing header/footer entries
+    \fancyfoot[C]{\thepage \hspace{1pt} \slash \hspace{1pt} \pageref*{LastPage}}%Place Page X / Y
+    \renewcommand{\headrulewidth}{0pt} %Deleted header line
+    \renewcommand{\footrulewidth}{0pt} %Deleted footer line
+
+%設定ファイルの読み込み
+\usepackage{statementenv}
+
+%Tikz
+\usepackage{tikz}
+
+%囲み枠の用意
+\usepackage {framed,xcolor}
+%https://atatat.hatenablog.com/entry/cloud_latex14_frame
+%https://konoyonohana.blog.fc2.com/blog-entry-242.html
+\usepackage {fancybox}
+\usepackage{ascmac}
+
+\begin{document}
+\thispagestyle{fancy} %これをつけないと\maketitleのせいで右上に1が余分に追加で表示されてしまう．
+
+\begin{shadebox}
+   \begin{center}
+   \vspace{10pt}
+   {\LARGE 円錐について}
+   \vspace{10pt}
+   \end{center}
+\end{shadebox}
+
+\begin{flushright}
+\today
+\end{flushright}
+
+\section{円錐とは？}
+まず、円錐ってどんな図形かを説明するよ。
+\begin{statesp}{point}{円錐の説明}
+下の図のように、底面が円になっていて、先端がとがっている立体を{\color{red} \bf 円錐}という。底面の円の{\color{red} 半径}$r$で表す。底面から先端までの{\color{red} 高さ}を$h$で表す。また、図で緑色や青色の線で表した、先端と底面を結ぶななめの線を{\color{red} \bf 母線}という。
+\end{statesp}
+\usetikzlibrary{calc}
+
+\begin{figure}[h!] 
+%円錐の書き方は以下を参考！！
+%https://tex.stackexchange.com/questions/171169/how-to-draw-a-simple-cone-with-height-and-radius-with-tikz
+\centering
+\begin{tikzpicture}
+    %中心(0,0)で170度から10度まで半径2.4cmの円弧を引く。posは0→1で、170度→0度となる点となる。
+    %この場合は、170度のところに(a)を設置
+    \draw[dashed] (0,0) arc (170:10:2cm and 0.4cm)coordinate[pos=0](a);
+    %中心(0,0)で-170度から-10度まで円弧を引く。pos指定がないため-10度に(b)
+    \draw (0,0) arc (-170:-10:2cm and 0.4cm)coordinate (b);
+    %底面の左端点(a)と右端点(b)を結ぶのが直径。その中点が底面の中心O
+    \fill ($(a)!0.5!(b)$) circle[radius=1pt] coordinate(O);
+    %(a)と(b)の中点をy軸方向にシフトした点(頂点)を配置して、その点をCとする。
+    \coordinate (c) at ([yshift=4cm]$(a)!0.5!(b)$);
+    %posが0→1となるとき、C→(0,0)となる。高さと直角の交わりを(aa)とする。
+    %１番目の--は、(a)と(b)の中点OとCを結ぶ線分を表していて、直後のnodeで線分の右側に、文字hを配置した。($(a)!0.5!(b)$)が終点。
+    %posが0→1となるとき、O→(b)となる。半径と直角の交わりを(bb)とする。
+    %中点Oと(b)を結ぶ線分の上に文字rを配置する。
+    \draw[densely dashed,red] (c) -- node[right,red,align=left] {\large 高さ\\$h$}coordinate[pos=0.95] (aa) (O)
+                            -- node[above,red] {\large 半径$r$}coordinate[pos=0.1] (bb) (b);
+    %(aa)と(bb)を直角に結ぶ
+    \draw (aa) -| (bb);
+    %頂点Cと底面の左右の端点を結ぶ。つまり母線を引く。
+    \draw[very thick,blue] (a) -- node[left]{\large 母線} (c);
+    \draw[very thick,green] (c) -- node[right]{\large 母線} (b);
+\end{tikzpicture}
+\caption{円錐}
+\end{figure}
+
+\section{体積、表面積}
+よく出てくる問題に、円錐の表面積と体積を求める問題があるよ。どうやって求めるか、整理していこう。
+\begin{statesp}[conevol]{formula}{円錐の体積}
+高さ$h$、底面の半径$r$の円錐の体積$V$は次のように求める。
+\begin{center}
+\textcolor{red}{$V$=\ $\frac{1}{3} \times$(底面の円の面積) $\times$ (高さ)} =\ $\frac{1}{3} \times \pi r^2 \times h$ 
+\end{center}
+まとめると、次のような式になる。
+\begin{equation}
+\textcolor{red}{V=\frac{1}{3} \pi h r^2}
+\end{equation}
+\end{statesp}
+
+%\begin{statesp}[ラベル名]{環境名}{ボックスタイトル}となっている。
+%\refspの仕方：\refsp{環境名：ラベル名}で参照している。
+この\refsp{formula:conevol}は絶対に暗記して、使えるようにしよう。\\
+次は、円錐の表面積の簡単な求め方について、見ていこう。
+
+\newpage
+
+\begin{statesp}[conearea]{formula}{円錐の表面積}
+高さ$h$、底面の半径$r$、母線の長さ$l$の円錐を考える。円錐の横側の面の面積を\textcolor{red}{側面積}という。下の図$ref$で確かめたほうが分かりやすいと思う。
+このとき、円錐の表面積$S$は、次のように求める。
+\begin{center}
+\textcolor{red}{(側面積)\ =\ (母線) $\times$ (半径)\ =\ $lr$}\\
+\textcolor{red}{(表面積$S$)\ =\ (側面積) $+$ (底面積)}\ =\ $lr + \pi r^2$
+\end{center}
+\end{statesp}
+
+%横にならべるのは、以下を参考に
+%https://atatat.hatenablog.com/entry/cloud_latex27_tikz_layou
+%扇形の展開図は、以下を参考にした
+%https://texwiki.texjp.org/TikZ
+\begin{figure}[htbp]
+\centering
+    \begin{tabular}{cc}
+	%%%%第一の図%%%%
+      \begin{minipage}[t]{0.35\linewidth}
+      \begin{tikzpicture}
+    \draw[dashed] (0,0) arc (170:10:2cm and 0.4cm)coordinate[pos=0](a);
+    \draw (0,0) arc (-170:-10:2cm and 0.4cm)coordinate (b);
+    \fill ($(a)!0.5!(b)$) circle[radius=1pt] coordinate(O);
+    \draw[densely dashed] (c) -- node[right,align=left] {高さ\\$h$}coordinate[pos=0.95] (aa) (O);
+    \draw[densely dashed,red] (O) -- node[above,red] {\large 半径$r$}coordinate[pos=0.1] (bb) (b);
+    %(aa)と(bb)を直角に結ぶ
+    \draw (aa) -| (bb);
+    %頂点Cと底面の左右の端点を結ぶ。つまり母線を引く。
+    \draw[thick,blue] (a) -- node[left]{\large 母線$l$} (c);
+    \draw (c) -- (b);
+\end{tikzpicture}
+\caption{円錐}
+      \end{minipage} &
+	%%%%第二の図%%%%
+      \begin{minipage}[t]{0.35\linewidth}
+      \begin{tikzpicture}
+\draw [thick] (2,-3/2) -- (0,0);
+\draw [thick] (-3/2,-2) -- (0,0);
+\draw [domain=-1.5:2,smooth,thick] plot (\x, -{sqrt((5/2)^2-(\x)^2)});
+\fill [red!30,domain=-1.5:2] (0,0) -- (-3/2,-2) -- plot (\x, -{sqrt((5/2)^2-(\x)^2)}) --(2,-3/2) -- cycle; 
+\node [above,red] at ($(0,0)!1.7cm!(1/4,-5/4)$) {\large 側面積};
+\fill ($(0,0)!3.2cm!(1/4,-5/4)$) circle[radius=1pt] coordinate(A);
+\draw (A) circle [radius=0.7];
+\end{tikzpicture}
+\caption{円錐の展開図と側面積}
+      \end{minipage}
+	%%%%%%%
+    \end{tabular}
+\end{figure}
+
+\begin{leftbar}
+\underline{おまけ}\\
+円錐などの立体的な図形の表面積や体積は、厳密には「積分」を使って求める。これに関しては、高校数学で学習する。だけど、解説されてる動画もyoutubeなどにあるとは思うので、興味がある方は調べてみるとよいかも。
+\end{leftbar}
+
+\begin{tcolorbox}
+受験に必要な、図形に関する情報をまだまだ加筆していきます！！
+\end{tcolorbox}
+
+\end{document}
