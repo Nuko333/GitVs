@@ -1,0 +1,29 @@
+/*余白について：https://webukatu.com/wordpress/blog/12300/#display_block*/
+/*行の先頭にアイコン：https://into-the-program.com/title-before-image/*/
+
+/*クラス指定をして、余白を開ける！*/
+.bottom_space {
+  margin-bottom: 3em;
+}
+
+
+/*先頭に画像を追加*/
+.title {
+  /*余白:上下左右*/
+  padding: 0 0 0 30px;
+  background-image: url(https://into-the-program.com/assets/images/icon/icon_clip.png);
+  background-repeat: no-repeat;
+  /*左端、上端からの距離を指定*/
+  background-position: 0 1px;
+}
+
+/*youtube紹介用のクラス*/
+.youtube {
+  color:red
+}
+
+/*下線マーカー*/
+.under{
+  background: linear-gradient(transparent 60%, yellow 30%);
+  display: inline-block;
+}
