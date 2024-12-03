@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.1-u1.30-230214-2.6 (utf8.sjis) (TeX Live 2024) (preloaded format=platex 2024.8.2)  28 SEP 2024 19:53
+This is e-upTeX, Version 3.141592653-p4.1.1-u1.30-230214-2.6 (utf8.sjis) (TeX Live 2024) (preloaded format=platex 2024.8.2)  4 DEC 2024 04:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -997,12 +997,12 @@ Package rerunfilecheck Info: File `Cone.out' has not changed.
 (rerunfilecheck)             Checksum: DD9ADEC50D226803C6C25CEA49E1CC5B;254.
  ) 
 Here is how much of TeX's memory you used:
- 29274 strings out of 474773
- 581232 string characters out of 5762002
+ 29275 strings out of 474773
+ 581251 string characters out of 5762002
  1943035 words of memory out of 5000000
- 51155 multiletter control sequences out of 15000+600000
+ 51156 multiletter control sequences out of 15000+600000
  603309 words of font info for 106 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  99i,16n,110p,541b,1386s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Cone.dvi (2 pages, 45548 bytes).
+Output written on Cone.dvi (2 pages, 45704 bytes).
